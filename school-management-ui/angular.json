@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "front-endapp-project": {
+    "school-management-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/front-endapp-project",
+            "outputPath": "dist/school-management-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "front-endapp-project:build:production"
+              "buildTarget": "school-management-ui:build:production"
             },
             "development": {
-              "buildTarget": "front-endapp-project:build:development"
+              "buildTarget": "school-management-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "front-endapp-project:build"
+            "buildTarget": "school-management-ui:build"
           }
         },
         "test": {

@@ -24,17 +24,14 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.http.post("http://localhost:8080/login", bodyData, {responseType: 'text'}).subscribe((resultData: any) => {
-      console.log("resuuuult: " + resultData);
 
-      // if (resultData.message == "Email not exits")
-      // {
-      //
-      //   alert("Email not exits");
-      //
-      //
-      // }
-      if (resultData == "Login Success") {
+    this.http.post("http://localhost:8080/login", bodyData).subscribe((resultData: any) => {
+
+      console.log("messssssage: " + resultData.message);
+
+      if (resultData.message == "Email not exits") {
+        alert("Email not exits");
+      } else if (resultData.message == "Login Success") {
         this.router.navigateByUrl('/home');
       } else {
         alert("Incorrect Email and Password not match");
