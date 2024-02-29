@@ -1,12 +1,16 @@
 package com.example.schoolmanagementsystem.model;
 
+import com.example.schoolmanagementsystem.security.Role;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name="users_table")
-public class UsersModel {
+public class UsersModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +25,25 @@ public class UsersModel {
     @Column(length = 45)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "roles_id")
-    private RolesModel role;
+//    @ManyToOne
+//    @JoinColumn(name = "roles_id")
+//    private RolesModel role;
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        return authorities;
+    }
 
     public Long getId() {
         return id;
@@ -47,6 +67,31 @@ public class UsersModel {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public String getLogin() {
@@ -77,6 +122,7 @@ public class UsersModel {
     public int hashCode() {
         return Objects.hash(getId(), getLogin(), getEmail(), getPassword());
     }
+
 
 
 }

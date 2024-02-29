@@ -1,6 +1,6 @@
 package com.example.schoolmanagementsystem.model;
 
-public class LoginMessage {
+public class LoginResponse {
     String message;
     Boolean status;
     public String getMessage() {
@@ -15,7 +15,7 @@ public class LoginMessage {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    public LoginMessage(String message, Boolean status) {
+    public LoginResponse(String message, Boolean status) {
         this.message = message;
         this.status = status;
     }

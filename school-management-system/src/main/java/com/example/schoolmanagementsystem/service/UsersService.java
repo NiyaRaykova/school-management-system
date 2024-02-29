@@ -1,11 +1,21 @@
 package com.example.schoolmanagementsystem.service;
 
+import com.example.schoolmanagementsystem.model.LoginResponse;
 import com.example.schoolmanagementsystem.model.UsersModel;
 import com.example.schoolmanagementsystem.repository.UsersRepository;
+import org.apache.catalina.Role;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersService {
