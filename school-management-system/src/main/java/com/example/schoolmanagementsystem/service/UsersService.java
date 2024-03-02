@@ -1,21 +1,11 @@
 package com.example.schoolmanagementsystem.service;
 
-import com.example.schoolmanagementsystem.model.LoginResponse;
-import com.example.schoolmanagementsystem.model.UsersModel;
+import com.example.schoolmanagementsystem.model.Role;
+import com.example.schoolmanagementsystem.model.User;
 import com.example.schoolmanagementsystem.repository.UsersRepository;
-import org.apache.catalina.Role;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UsersService {
@@ -23,19 +13,19 @@ public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
-    public UsersModel registerUser(String login, String password, String email){
-        if(login == null && password == null){
+    public User registerUser( String password, String email, Role role){
+        if(email == null || password == null || role == null){
             return null;
         } else {
-            UsersModel usersModel = new UsersModel();
-            usersModel.setLogin(login);
+            User usersModel = new User();
             usersModel.setPassword(password);
             usersModel.setEmail(email);
+            usersModel.setRole(role);
             return usersRepository.save(usersModel);
         }
     }
 
-    public UsersModel authenticate(String email, String password){
+    public User authenticate(String email, String password){
         return usersRepository.findByEmailAndPassword(email, password).orElse(null);
     }
 }
