@@ -10,8 +10,10 @@ import { UserType } from '../model/UserType';
 export class RegisterComponent {
   email: string = "";
   password: string = "";
-  role: UserType = UserType.STUDENT;
-  protected readonly UserType: UserType[] = Object.values(UserType);
+  role: UserType | undefined;
+  protected readonly UserType: UserType[] = Object.values(UserType).filter( t => {
+    return t != UserType.ADMIN;
+  });
 
   constructor(private http: HttpClient) {
   }
@@ -22,6 +24,7 @@ export class RegisterComponent {
       "password": this.password,
       "role": this.role
     };
+
     this.http.post("http://localhost:8080/register", bodyData, {responseType: 'text'}).subscribe((resultData: any) => {
       console.log(resultData);
       alert("User Registered Successfully");
