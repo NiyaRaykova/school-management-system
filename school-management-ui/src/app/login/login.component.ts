@@ -1,6 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import { IdentityManagementService } from '../service/identity-management.service';
+import { UserType } from '../model/UserType';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,8 @@ export class LoginComponent {
   email: string = "";
   password: string = "";
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient,
+              private identityManagement: IdentityManagementService) {
   }
 
   Login() {
@@ -24,18 +27,22 @@ export class LoginComponent {
       password: this.password,
     };
 
+    this.http.post<LoginResponse>("http://localhost:8080/login", bodyData).subscribe((resultData: LoginResponse) => {
 
-    this.http.post("http://localhost:8080/login", bodyData).subscribe((resultData: any) => {
-
-      console.log("messssssage: " + resultData.message);
-
-      if (resultData.message == "Email not exits") {
-        alert("Email not exits");
-      } else if (resultData.message == "Login Success") {
+      if (resultData?.message == "Email does not exist") {
+        alert("Incorrect Email and Password not match");
+      } else if (resultData?.message == "Success!" && resultData.role) {
+        this.identityManagement.setUserType(resultData.role)
         this.router.navigateByUrl('/home');
       } else {
         alert("Incorrect Email and Password not match");
       }
     });
   }
+}
+
+export interface LoginResponse {
+  message: string;
+  status: boolean;
+  role: UserType;
 }

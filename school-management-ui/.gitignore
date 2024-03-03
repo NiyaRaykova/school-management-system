@@ -1,42 +1,59 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/package-lock.json
+/yarn.lock
 
 # Compiled output
 /dist
 /tmp
 /out-tsc
-/bazel-out
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Logs
+/logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
-# System files
+# OS generated files #
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# IDE-specific files
+/.idea
+/.vscode
+/*.sublime-workspace
+
+# Angular files
+/angular.json
+/.angular/cache
+
+# IDE - VSCode
+.history/
+.settings/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Firebase cache
+/.firebase/
+
+# End of https://www.toptal.com/developers/gitignore/api/angular
