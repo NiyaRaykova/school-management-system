@@ -13,8 +13,8 @@
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Role</mat-label>
-          <mat-select required>
-            <mat-option [(ngModel)]="role" [ngModelOptions]="{standalone: true}" [value]="chosenRole" *ngFor="let chosenRole of UserType">
+          <mat-select [(ngModel)]="role" [ngModelOptions]="{standalone: true}" required>
+            <mat-option [value]="chosenRole" *ngFor="let chosenRole of UserType">
               {{chosenRole}}
             </mat-option>
           </mat-select>
