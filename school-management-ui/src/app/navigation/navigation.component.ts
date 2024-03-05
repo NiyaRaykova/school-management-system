@@ -1,8 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IdentityManagementService } from '../service/identity-management.service';
-import {UserType} from "../model/UserType";
-import {Subscription} from "rxjs";
-import {Router} from "@angular/router";
+import { UserType } from '../model/UserType';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,31 +9,29 @@ import {Router} from "@angular/router";
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css'
 })
-export class NavigationComponent  implements OnInit {
+export class NavigationComponent implements OnInit {
 
   userType: UserType | null | undefined;
 
   constructor(private identityManagement: IdentityManagementService,
               private router: Router) {
-    // Subscribe to storage changes
   }
 
   ngOnInit(): void {
-    // Call the getUserType method from IdentityManagementService
-    // and assign the returned user type to the userType variable
-    this.userType = this.identityManagement.getUserType();
-    // this.sessionStorage.storageChanges$.subscribe(key => {
-    //   // Check if the change is related to the session storage key you're interested in
-    //   this.refreshComponent();
-    // });
+    this.refreshUserType();
+    this.identityManagement.loginSubject.subscribe(b => {
+      this.refreshUserType();
+    })
   }
 
   public logout(): void {
-    this.identityManagement.logout();
-    this.router.navigateByUrl("/login");
-  }
-  private refreshComponent(): void {
+    this.identityManagement.invalidateSession();
+    this.refreshUserType();
     this.router.navigateByUrl('/home');
+  }
+
+  private refreshUserType() {
+    this.userType = this.identityManagement.getUserType();
   }
 
   protected readonly UserType = UserType;
