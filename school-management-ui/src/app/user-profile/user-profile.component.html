@@ -1,0 +1,9 @@
+<form class="user-profile-form">
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="userEmail" name="userEmail">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Role" [(ngModel)]="userRole" name="userRole">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="editProfile()">Edit</button>
+</form>

@@ -1,0 +1,18 @@
+.user-profile-form {
+  width: 300px; /* Adjust the width as needed */
+  margin: auto; /* Center the form horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Make the form take up the full height of the viewport */
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px; /* Add some space between form fields */
+}
+
+button {
+  width: 100%;
+}

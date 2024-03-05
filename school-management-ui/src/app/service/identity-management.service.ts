@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { UserType } from '../model/UserType';
 
 @Injectable({
@@ -7,15 +8,38 @@ import { UserType } from '../model/UserType';
 export class IdentityManagementService {
 
   private userKey: string = 'currentUserType'; // Key used in session storage
+  private userKeyEmail: string = 'currentUserEmail'; // Key used in session storage
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   public setUserType(userType: UserType): void {
-    sessionStorage.setItem(this.userKey, userType);
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem(this.userKey, userType);
+    }
   }
 
+  public setUserEmail(email: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem(this.userKeyEmail, email);
+    }
+  }
+
+  getUserEmail(): string | null {
+    if (!isPlatformBrowser(this.platformId)) {
+      return null;
+    }
+    const userEmail : string | null = sessionStorage.getItem(this.userKeyEmail);
+    if (!userEmail) {
+      return null;
+    }else {
+      return userEmail;
+    }
+  }
 
   getUserType(): UserType | null {
+    if (!isPlatformBrowser(this.platformId)) {
+      return null;
+    }
     const userType : string | null = sessionStorage.getItem(this.userKey);
     if (!userType) {
       return null;
@@ -33,6 +57,13 @@ export class IdentityManagementService {
   }
 
   public invalidateSession(): void {
-    sessionStorage.removeItem(this.userKey);
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem(this.userKey);
+      sessionStorage.removeItem(this.userKeyEmail);
+    }
+  }
+
+  logout(): void {
+    this.invalidateSession();
   }
 }

@@ -32,7 +32,9 @@ export class LoginComponent {
       if (resultData?.message == "Email does not exist") {
         alert("Incorrect Email and Password not match");
       } else if (resultData?.message == "Success!" && resultData.role) {
-        this.identityManagement.setUserType(resultData.role)
+
+        this.identityManagement.setUserEmail(this.email)
+        this.identityManagement.setUserType(resultData.role);
         this.router.navigateByUrl('/home');
       } else {
         alert("Incorrect Email and Password not match");
