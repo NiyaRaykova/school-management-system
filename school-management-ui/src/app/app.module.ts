@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { UsersComponent } from './users/users.component'
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -21,6 +22,17 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import {
+  MatCell,
+  MatHeaderCell,
+  MatHeaderRow,
+  MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableModule
+} from "@angular/material/table";
+import {CommonModule} from "@angular/common";
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +41,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     RegisterComponent,
     HomeComponent,
     NavigationComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UsersComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +63,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTable,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    CommonModule,
+    MatTableModule
   ],
   providers: [
     provideClientHydration(),

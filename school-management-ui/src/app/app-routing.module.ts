@@ -4,6 +4,8 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {RegisterComponent} from "./register/register.component";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
+import {UsersComponent} from "./users/users.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
 
 const routes: Routes = [
   {
@@ -23,6 +25,14 @@ const routes: Routes = [
   {
     path: 'userProfile',
     component: UserProfileComponent,
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+  },
+  {
+    path: 'app-edit-user/:email',
+    component: EditUserComponent,
   }
 ];
 

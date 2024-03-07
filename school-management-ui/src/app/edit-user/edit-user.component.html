@@ -1,0 +1,6 @@
+<form (submit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="New Email" [(ngModel)]="newEmail" required>
+  </mat-form-field>
+  <button mat-button (click)="saveUser()" type="submit">Save</button>
+</form>

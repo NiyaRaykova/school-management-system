@@ -7,6 +7,8 @@ import com.example.schoolmanagementsystem.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -32,7 +34,20 @@ public class UserService {
 
     }
 
+    public User editUserEmail(String oldEmail, String newEmail){
+        if (oldEmail == null){
+            return null;
+        }
+        User presentUser = usersRepository.findByEmail(oldEmail).orElse(null);
+        presentUser.setEmail(newEmail);
+        return usersRepository.save(presentUser);
+    }
+
     public User authenticate(String email, String password){
         return usersRepository.findByEmailAndPassword(email, password).orElse(null);
+    }
+
+    public List<User> findAllUsers() {
+        return usersRepository.findAll();
     }
 }

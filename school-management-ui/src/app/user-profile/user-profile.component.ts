@@ -9,11 +9,11 @@ import {UserType} from "../model/UserType";
 })
 export class UserProfileComponent {
   userEmail: string | null;
-  userRole: string;
+  userRole: UserType | null;
 
   constructor(private identityManagement: IdentityManagementService) {
     this.userEmail = identityManagement.getUserEmail();
-    this.userRole = identityManagement.getUserType.toString();
+    this.userRole = identityManagement.getUserType();
   }
 
   editProfile() {
