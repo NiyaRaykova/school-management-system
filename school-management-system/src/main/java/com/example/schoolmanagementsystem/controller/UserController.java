@@ -53,9 +53,9 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping("/editEmail/{oldEmail}")
-    public ResponseEntity<User> updateUserEmail(@PathVariable String oldEmail, @RequestBody String newEmail) {
-        User updatedUser = userService.editUserEmail(oldEmail, newEmail);
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUserEmail(@PathVariable Long id, @RequestBody User user) {
+        User updatedUser = userService.updateUser(id, user);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         } else {

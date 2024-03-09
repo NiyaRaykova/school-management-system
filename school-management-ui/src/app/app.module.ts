@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { UsersComponent } from './users/users.component'
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
+import { UsersComponent } from './users-grid/users.component'
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -17,10 +17,10 @@ import { MatButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NavigationComponent } from './navigation/navigation.component';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {
   MatCell,
@@ -30,9 +30,10 @@ import {
   MatRowDef,
   MatTable,
   MatTableModule
-} from "@angular/material/table";
-import {CommonModule} from "@angular/common";
+} from '@angular/material/table';
+import { CommonModule } from '@angular/common';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,12 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     MatRow,
     MatRowDef,
     CommonModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogClose,
+    MatDialogActions,
+    MatDialogContent,
+    ReactiveFormsModule,
+    MatDialogTitle
   ],
   providers: [
     provideClientHydration(),
@@ -85,4 +91,5 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+}

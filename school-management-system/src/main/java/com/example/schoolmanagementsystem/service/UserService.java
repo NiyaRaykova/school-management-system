@@ -34,13 +34,14 @@ public class UserService {
 
     }
 
-    public User editUserEmail(String oldEmail, String newEmail){
-        if (oldEmail == null){
-            return null;
-        }
-        User presentUser = usersRepository.findByEmail(oldEmail).orElse(null);
-        presentUser.setEmail(newEmail);
-        return usersRepository.save(presentUser);
+    public User updateUser(Long id, User user) {
+        // Check if user exists, perform update logic, handle exceptions as needed
+        return usersRepository.findById(id).map(existingUser -> {
+            existingUser.setRole(user.getRole());
+            existingUser.setEmail(user.getEmail());
+            // copy other properties
+            return usersRepository.save(existingUser);
+        }).orElseThrow(() -> new RuntimeException("User not found with id " + id)); // Consider a more specific exception
     }
 
     public User authenticate(String email, String password){

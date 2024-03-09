@@ -1,6 +1,28 @@
-<form (submit)="onSubmit()">
-  <mat-form-field>
-    <input matInput placeholder="New Email" [(ngModel)]="newEmail" required>
-  </mat-form-field>
-  <button mat-button (click)="saveUser()" type="submit">Save</button>
-</form>
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content>
+  <form [formGroup]="editUserForm">
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role" required>
+        <mat-option [value]="chosenRole" *ngFor="let chosenRole of UserType">
+          {{chosenRole}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" [mat-dialog-close]="editUserForm.getRawValue()" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+</mat-dialog-actions>
