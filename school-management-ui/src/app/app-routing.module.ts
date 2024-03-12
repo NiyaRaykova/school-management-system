@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {HomeComponent} from "./home/home.component";
-import {RegisterComponent} from "./register/register.component";
-import {UserProfileComponent} from "./user-profile/user-profile.component";
-import {UsersComponent} from "./users/users.component";
-import {EditUserComponent} from "./edit-user/edit-user.component";
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UsersComponent } from './users-grid/users.component';
 
 const routes: Routes = [
   {
@@ -29,10 +28,6 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
-  },
-  {
-    path: 'app-edit-user/:email',
-    component: EditUserComponent,
   }
 ];
 
@@ -40,4 +35,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

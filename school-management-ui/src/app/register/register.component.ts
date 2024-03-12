@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { UserType } from '../model/UserType';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +9,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  email: string = "";
-  password: string = "";
+  email: string = '';
+  password: string = '';
   role: UserType | undefined;
-  protected readonly UserType: UserType[] = Object.values(UserType).filter( t => {
+  protected readonly UserType: UserType[] = Object.values(UserType).filter(t => {
     return t != UserType.ADMIN;
   });
 
@@ -21,14 +21,14 @@ export class RegisterComponent {
 
   save() {
     let bodyData = {
-      "email": this.email,
-      "password": this.password,
-      "role": this.role,
+      'email': this.email,
+      'password': this.password,
+      'role': this.role,
     };
 
-    this.http.post("http://localhost:8080/register", bodyData, {responseType: 'text'}).subscribe((resultData: any) => {
+    this.http.post('http://localhost:8080/register', bodyData, { responseType: 'text' }).subscribe((resultData: any) => {
       console.log(resultData);
-      alert("User Registered Successfully");
+      alert('User Registered Successfully');
       this.router.navigateByUrl('/login');
     });
   }
