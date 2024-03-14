@@ -17,7 +17,11 @@ export class UserService {
   }
 
   public getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/${id}`);
+    return this.http.get<User>(`${this.baseUrl}/users/${id}`);
+  }
+
+  public getUserByEmail(email: string | null): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/users/email/${email}`);
   }
 
   public createUser(user: User): Observable<User> {

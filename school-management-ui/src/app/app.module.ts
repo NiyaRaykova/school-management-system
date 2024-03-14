@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatCell,
   MatHeaderCell,
@@ -34,6 +35,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
     NavigationComponent,
     UserProfileComponent,
     UsersComponent,
-    EditUserComponent
+    EditUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
     MatDialogActions,
     MatDialogContent,
     ReactiveFormsModule,
-    MatDialogTitle
+    MatDialogTitle,
+    FlexLayoutModule
   ],
   providers: [
     provideClientHydration(),

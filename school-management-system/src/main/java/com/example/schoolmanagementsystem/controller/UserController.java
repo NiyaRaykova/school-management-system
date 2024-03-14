@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -53,11 +54,36 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/users/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) {
+        Optional<User> user = userService.findUserByID(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/users/email/{email}")
+    public ResponseEntity<Optional<User>> getUserByEmail(@PathVariable String email) {
+        Optional<User> user = userService.findUserByEmail(email);
+        return ResponseEntity.ok(user);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUserEmail(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<User> updateUserById(@PathVariable Long id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUserById(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

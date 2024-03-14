@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
 import { User } from '../model/User';
 import { UserService } from '../service/user.service';
 
@@ -53,4 +54,30 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+   deleteUser(user: User): void {
+      const dialogRef = this.dialog.open(DeleteUserComponent, {
+        width: '250px',
+        data: { user }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const id = result.id ?? 0;
+
+          // Ensure other properties match the expected types, handling nulls as needed
+          const user: User = {
+            id: id,
+            name: result.name,
+            email: result.email,
+            role: result.role
+          };
+
+          // Now `user` should match the expected type structure of `Partial<User>`
+          this.userService.deleteUser(id).subscribe(result => {
+              this.loadUsers();
+          })
+        }
+      });
+    }
 }

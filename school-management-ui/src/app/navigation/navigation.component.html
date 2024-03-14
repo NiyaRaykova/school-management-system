@@ -5,6 +5,8 @@
     </button>
     <span>School Management</span>
     <span class="example-spacer"></span>
+    <button routerLink="login" mat-button>Login</button>
+    <button routerLink="register" mat-button>Register</button>
   </mat-toolbar>
 </div>
 <div *ngIf="userType === UserType.ADMIN">
@@ -17,6 +19,7 @@
     <button routerLink="home" mat-button>Home</button>
     <button routerLink="users" mat-button>Users</button>
     <button mat-button>Statistics</button>
+    <button routerLink="login" mat-button (click)="logout()" >Logout</button>
   </mat-toolbar>
 </div>
 <div *ngIf="userType === UserType.STUDENT">
@@ -28,6 +31,6 @@
     <span class="example-spacer"></span>
     <button routerLink="home" mat-button>Home</button>
     <button routerLink="userProfile" mat-button>Profile</button>
-    <button mat-button (click)="logout()" >Logout</button>
+    <button routerLink="login" mat-button (click)="logout()" >Logout</button>
   </mat-toolbar>
 </div>

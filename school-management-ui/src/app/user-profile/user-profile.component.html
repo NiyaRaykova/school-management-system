@@ -1,9 +1,9 @@
-<form class="user-profile-form">
+<form class="user-profile-form" *ngIf="users">
   <mat-form-field>
-    <input matInput placeholder="Email" [(ngModel)]="userEmail" name="userEmail">
+    <input matInput placeholder="Email" [ngModel]="users?.email" (ngModelChange)="users.email = $event" name="userEmail" readonly>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Role" [(ngModel)]="userRole" name="userRole">
+    <input matInput placeholder="Role" [ngModel]="users?.role" (ngModelChange)="users.role = $event" name="userRole" readonly>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="editProfile()">Edit</button>
+  <button mat-raised-button color="primary" (click)="editProfile(users)">Edit</button>
 </form>

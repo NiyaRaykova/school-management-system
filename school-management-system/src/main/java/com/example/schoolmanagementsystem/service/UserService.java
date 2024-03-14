@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -44,11 +45,38 @@ public class UserService {
         }).orElseThrow(() -> new RuntimeException("User not found with id " + id)); // Consider a more specific exception
     }
 
+    public User updateUser(String email, User user) {
+        // Check if user exists, perform update logic, handle exceptions as needed
+        return usersRepository.findByEmail(email).map(existingUser -> {
+            existingUser.setRole(user.getRole());
+            existingUser.setEmail(user.getEmail());
+            // copy other properties
+            return usersRepository.save(existingUser);
+        }).orElseThrow(() -> new RuntimeException("User not found with email " + email)); // Consider a more specific exception
+    }
+
+    public boolean deleteUserById(Long id) {
+        Optional<User> userOptional = usersRepository.findById(id);
+        if (userOptional.isPresent()) {
+            usersRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
     public User authenticate(String email, String password){
         return usersRepository.findByEmailAndPassword(email, password).orElse(null);
     }
 
     public List<User> findAllUsers() {
         return usersRepository.findAll();
+    }
+
+    public Optional<User> findUserByID(Long id) {
+        return usersRepository.findById(id);
+    }
+
+    public Optional<User> findUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
     }
 }
