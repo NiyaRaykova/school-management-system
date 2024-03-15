@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {IdentityManagementService} from "../service/identity-management.service";
-import {UserType} from "../model/UserType";
+import { IdentityManagementService } from '../service/identity-management.service';
+import { UserType } from '../model/UserType';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../service/user.service';
 import { User } from '../model/User';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,11 +14,14 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
 })
 export class UserProfileComponent implements OnInit {
 
-  users: User | null = null;
+  user: User | null = null;
   userEmail: string | null = null;
   userRole: UserType | null = null;
 
-  constructor(private identityManagement: IdentityManagementService, public dialog: MatDialog, private userService: UserService) {
+  constructor(private identityManagement: IdentityManagementService,
+              public dialog: MatDialog,
+              private userService: UserService,
+              private router: Router) {
     this.userEmail = identityManagement.getUserEmail();
     this.userRole = identityManagement.getUserType();
   }
@@ -27,22 +31,25 @@ export class UserProfileComponent implements OnInit {
   }
 
   loadUser(): void {
-    this.userService.getUserByEmail(this.userEmail).subscribe((users: User) => {
-      this.users = users;
+    this.userService.getUserByEmail(this.userEmail).subscribe((user: User) => {
+      this.user = user;
     });
   }
 
   editProfile(user: User): void {
     const dialogRef = this.dialog.open(EditUserComponent, {
-        width: '250px',
-        data: { user }
+      width: '250px',
+      data: {
+        user: user,
+        showRole: false
+      }
     });
 
 
     dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          const id = result.id ?? 0;
-          const email = result.email ?? 0;
+      if (result) {
+        const id = result.id ?? 0;
+        const email = result.email ?? 0;
 
 
         const user: User = {
@@ -53,11 +60,13 @@ export class UserProfileComponent implements OnInit {
         };
 
         this.userService.updateUser(id, user).subscribe(result => {
-           if (result) {
-               this.loadUser();
-             }
-          });
-        }
+          if (result) {
+            this.identityManagement.setUserEmail(email);
+            this.router.navigateByUrl('/userProfile');
+            this.loadUser();
+          }
+        });
+      }
     });
   }
 }
