@@ -2,7 +2,7 @@ package com.example.schoolmanagementsystem.service;
 
 import com.example.schoolmanagementsystem.model.Role;
 import com.example.schoolmanagementsystem.model.User;
-import com.example.schoolmanagementsystem.repository.UsersRepository;
+import com.example.schoolmanagementsystem.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository usersRepository;
 
     public User registerUser( String password, String email, Role role){
         if (email == null || password == null || role == null){

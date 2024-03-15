@@ -36,6 +36,7 @@ import { CommonModule } from '@angular/common';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { SchoolsGridComponent } from './schools-grid/schools-grid.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     UserProfileComponent,
     UsersComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    SchoolsGridComponent
   ],
   imports: [
     BrowserModule,

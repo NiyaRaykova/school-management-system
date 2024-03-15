@@ -22,7 +22,7 @@ public class SchoolManagementSystemApplication {
 	@PostConstruct
 	private void createAdmin() {
 		userService.registerUser("pass", "admin", Role.ADMIN);
-		userService.registerUser("pass", "asd", Role.ADMIN);
+		userService.registerUser("pass", "teacher", Role.TEACHER);
 		userService.registerUser("pass", "student", Role.STUDENT);
 	}
 }
