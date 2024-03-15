@@ -11,14 +11,16 @@
       <input matInput formControlName="email">
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Role</mat-label>
-      <mat-select formControlName="role" required>
-        <mat-option [value]="chosenRole" *ngFor="let chosenRole of UserType">
-          {{chosenRole}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="data.showRole">
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option [value]="chosenRole" *ngFor="let chosenRole of UserType">
+            {{ chosenRole }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
   </form>
 </mat-dialog-content>
