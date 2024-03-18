@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edit School</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editSchoolForm">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Address">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary" (click)="onSaveClick()">Save</button>
+</div>
