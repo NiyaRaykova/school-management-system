@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './users-grid/users.component';
+import { SchoolsGridComponent } from './schools-grid/schools-grid.component';
 
 const routes: Routes = [
   {

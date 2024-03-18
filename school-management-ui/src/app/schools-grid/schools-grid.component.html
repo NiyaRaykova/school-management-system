@@ -1,1 +1,29 @@
-<p>schools-grid works!</p>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="schools">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+      <mat-cell *matCellDef="let school"> {{ school.id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let school"> {{ school.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address</mat-header-cell>
+      <mat-cell *matCellDef="let school"> {{ school.address }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+      <mat-cell >
+        <button mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="['id', 'name', 'address', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'name', 'address', 'action']"></mat-row>
+  </mat-table>
+</div>
+<button mat-raised-button color="primary" (click)="openEditSchoolDialog()">Add School</button>

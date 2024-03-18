@@ -27,6 +27,10 @@ public class SchoolService {
         }).orElseThrow(() -> new RuntimeException("School not found with id " + id)); // Consider a more specific exception
     }
 
+    public School createSchool(School school) {
+        return schoolRepository.save(school);
+    }
+
     public boolean deleteSchoolById(Long id) {
         Optional<School> userOptional = schoolRepository.findById(id);
         if (userOptional.isPresent()) {

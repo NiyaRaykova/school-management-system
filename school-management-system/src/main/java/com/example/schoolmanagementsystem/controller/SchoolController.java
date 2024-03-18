@@ -2,6 +2,7 @@ package com.example.schoolmanagementsystem.controller;
 
 import com.example.schoolmanagementsystem.model.School;
 import com.example.schoolmanagementsystem.service.SchoolService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class SchoolController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping("/schools/{id}")
+    @PutMapping("/schools")
     public ResponseEntity<School> updateSchoolById(@PathVariable Long id, @RequestBody School school) {
         School updatedSchool = schoolService.updateSchool(id, school);
         if (updatedSchool != null) {
@@ -32,6 +33,14 @@ public class SchoolController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/schools")
+    public ResponseEntity<School> createSchool(@RequestBody School school) {
+        School createdSchool = schoolService.createSchool(school);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdSchool);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
