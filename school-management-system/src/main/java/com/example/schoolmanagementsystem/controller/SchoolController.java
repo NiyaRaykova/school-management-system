@@ -25,7 +25,7 @@ public class SchoolController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping("/schools")
+    @PutMapping("/schools/{id}")
     public ResponseEntity<School> updateSchoolById(@PathVariable Long id, @RequestBody School school) {
         School updatedSchool = schoolService.updateSchool(id, school);
         if (updatedSchool != null) {
@@ -52,5 +52,12 @@ public class SchoolController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/schools/assign-school-to-user")
+    public ResponseEntity<Void> assignSchoolToUser(@RequestParam Long schoolId, @RequestParam Long userId) {
+        schoolService.assignSchoolToUser(schoolId, userId);
+        return ResponseEntity.ok().build();
     }
 }

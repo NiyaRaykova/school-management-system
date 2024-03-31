@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { School } from '../model/School';
 import { EditSchoolComponent } from '../edit-school/edit-school.component';
+import { DeleteSchoolComponent } from '../delete-school/delete-school.component';
 import { SchoolService } from '../service/school.service';
 
 @Component({
@@ -22,9 +23,8 @@ export class SchoolsGridComponent implements OnInit {
   loadSchools(): void {
      this.schoolSerivce.getAllSchools().subscribe((schools: School[]) => {
        this.schools = schools;
+        console.log("schooools" + this.schools);
      });
-    console.log("schooools" + this.schools)
-
   }
 
   openEditSchoolDialog(): void {
@@ -44,11 +44,58 @@ export class SchoolsGridComponent implements OnInit {
                 address: result.address,
               };
 
-              // Now `user` should match the expected type structure of `Partial<User>`
               this.schoolSerivce.createSchool(school).subscribe(result => {
                   this.loadSchools();
               })
             }
     });
   }
+
+editSchool(school: School): void {
+        const dialogRef = this.dialog.open(EditSchoolComponent, {
+          width: '250px',
+          data: { school }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            const id = result.id ?? 0;
+
+            // Ensure other properties match the expected types, handling nulls as needed
+            const school: School = {
+              id: id,
+              name: result.name,
+              address: result.address
+            };
+
+            this.schoolSerivce.updateSchool(id, school).subscribe(result => {
+                this.loadSchools();
+            })
+          }
+        });
+}
+
+deleteSchool(school: School): void {
+        const dialogRef = this.dialog.open(DeleteSchoolComponent, {
+          width: '250px',
+          data: { school }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            const id = result.id ?? 0;
+
+            // Ensure other properties match the expected types, handling nulls as needed
+            const school: School = {
+              id: id,
+              name: result.name,
+              address: result.address
+            };
+
+            this.schoolSerivce.deleteSchool(id).subscribe(result => {
+                this.loadSchools();
+            })
+          }
+        });
+    }
 }

@@ -14,16 +14,20 @@
     </ng-container>
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
-      <mat-cell >
-        <button mat-icon-button color="primary">
+      <mat-cell *matCellDef="let school">
+        <button mat-icon-button (click)="editSchool(school)" color="primary" >
           <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteSchool(school)" color="primary">
+          <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
-
     <mat-header-row
       *matHeaderRowDef="['id', 'name', 'address', 'action']"></mat-header-row>
     <mat-row *matRowDef="let row; columns: ['id', 'name', 'address', 'action']"></mat-row>
   </mat-table>
 </div>
+<div style="text-align: center; margin-top: 20px;">
 <button mat-raised-button color="primary" (click)="openEditSchoolDialog()">Add School</button>
+</div>
