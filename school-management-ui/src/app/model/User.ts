@@ -5,5 +5,6 @@ export interface User {
   name: string;
   email: string ;
   role: UserType ;
+  schoolId? : number;
   // Marking fields as optional or nullable
 }

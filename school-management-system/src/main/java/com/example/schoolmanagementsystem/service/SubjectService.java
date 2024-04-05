@@ -27,6 +27,10 @@ public class SubjectService {
         }).orElseThrow(() -> new RuntimeException("Subject not found with id " + id)); // Consider a more specific exception
     }
 
+    public Subject createSubject(Subject subject) {
+        return subjectRepository.save(subject);
+    }
+
     public boolean deleteSubjectById(Long id) {
         Optional<Subject> userOptional = subjectRepository.findById(id);
         if (userOptional.isPresent()) {

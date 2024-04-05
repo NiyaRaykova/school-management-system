@@ -16,6 +16,19 @@
       <mat-header-cell *matHeaderCellDef> Password</mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.password }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="school">
+      <mat-header-cell *matHeaderCellDef> School </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <ng-container *ngIf="!user.isEditing; else editSchool">
+          {{ user.school }}
+        </ng-container>
+        <ng-template #editSchool>
+          <mat-select [(ngModel)]="user.schoolId" (selectionChange)="onSchoolChange(user, user.schoolId)">
+            <mat-option *ngFor="let school of schools" [value]="school.id">{{ school.name }}</mat-option>
+          </mat-select>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
       <mat-cell *matCellDef="let user">
@@ -29,7 +42,7 @@
     </ng-container>
 
     <mat-header-row
-      *matHeaderRowDef="['id', 'email', 'password', 'role', 'action']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['id', 'email', 'password', 'role', 'action']"></mat-row>
+      *matHeaderRowDef="['id', 'email', 'password', 'role', 'school', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'email', 'password', 'role', 'school', 'action']"></mat-row>
   </mat-table>
 </div>

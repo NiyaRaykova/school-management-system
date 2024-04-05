@@ -35,4 +35,8 @@ export class SchoolService {
   public deleteSchool(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/schools/${id}`);
   }
+
+  public assignSchoolToUser(schoolId: number, userId: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/schools/assign-school-to-user?schoolId=${schoolId}&userId=${userId}`, {});
+  }
 }

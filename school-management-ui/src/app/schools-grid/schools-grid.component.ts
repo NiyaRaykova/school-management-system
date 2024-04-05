@@ -23,11 +23,10 @@ export class SchoolsGridComponent implements OnInit {
   loadSchools(): void {
      this.schoolSerivce.getAllSchools().subscribe((schools: School[]) => {
        this.schools = schools;
-        console.log("schooools" + this.schools);
      });
   }
 
-  openEditSchoolDialog(): void {
+  openAddSchoolDialog(): void {
     const dialogRef = this.dialog.open(EditSchoolComponent, {
       width: '250px',
       data: { school: {  id: 1, name: 'School 1', address: 'Address 1' } } // Pass initial data if needed
@@ -40,8 +39,8 @@ export class SchoolsGridComponent implements OnInit {
               // Ensure other properties match the expected types, handling nulls as needed
               const school: School = {
                id: id,
-                name: result.name,
-                address: result.address,
+               name: result.name,
+               address: result.address,
               };
 
               this.schoolSerivce.createSchool(school).subscribe(result => {

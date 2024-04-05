@@ -2,28 +2,23 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserType } from '../model/UserType';
-import { School } from '../model/School';
 
 @Component({
-  selector: 'app-edit-user-modal',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  selector: 'app-delete-subject',
+  templateUrl: './delete-subject.component.html',
+  styleUrls: ['./delete-subject.component.css']
 })
-export class EditUserComponent {
-  editUserForm = new FormGroup({
+export class DeleteSubjectComponent {
+deleteSubjectForm = new FormGroup({
     id: new FormControl({ value: 0, disabled: true }),
-    email: new FormControl(''),
-    role: new FormControl(''),
-    schoolId: new FormControl('')
+    name: new FormControl({ value: 0, disabled: true })
   });
-
-  schools: School[] = [];
 
   protected readonly UserType: UserType[] = Object.values(UserType).filter(t => {
     return t != UserType.ADMIN;
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.editUserForm.patchValue(data.user);
+    this.deleteSubjectForm.patchValue(data.subject);
   }
 }
