@@ -2,6 +2,8 @@ package com.example.schoolmanagementsystem.controller;
 
 import com.example.schoolmanagementsystem.model.LoginResponse;
 import com.example.schoolmanagementsystem.model.User;
+import com.example.schoolmanagementsystem.model.UserDTO;
+import com.example.schoolmanagementsystem.service.SchoolService;
 import com.example.schoolmanagementsystem.service.UserService;
 
 import org.springframework.http.HttpStatus;
@@ -11,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final SchoolService schoolService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
@@ -27,7 +29,8 @@ public class UserController {
         // TODO limit creating of ADMIN roles and block with 401.
         // TODO check if usser, email and role are present. This should happen here and not in the repo or service
         System.out.println("register request " + user);
-        User registeredUser = userService.registerUser(user.getPassword(), user.getEmail(), user.getRole());
+        User registeredUser = userService.registerUser(user.getPassword(), user.getEmail(),
+                user.getRole());
         return ResponseEntity.ok(true);
     }
 
@@ -42,7 +45,8 @@ public class UserController {
             response.setMessage("Success!");
             return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Email does not exist", false, null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new LoginResponse("Email does not exist", false, null));
         }
     }
 
@@ -69,8 +73,16 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUserById(@PathVariable Long id, @RequestBody User user) {
-        User updatedUser = userService.updateUser(id, user);
+    public ResponseEntity<User> updateUserById(@PathVariable Long id,
+            @RequestBody UserDTO userDto) {
+        User updatedUser;
+        User user = this.userService.findUserByID(userDto.getId()).orElse(null);
+
+        if (userDto.getSchoolId() != null && user != null) {
+            user.setSchool(schoolService.getSchoolById(userDto.getSchoolId()).orElse(null));
+        }
+
+        updatedUser = userService.updateUser(id, user);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         } else {

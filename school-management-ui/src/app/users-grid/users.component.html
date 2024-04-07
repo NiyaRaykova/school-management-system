@@ -19,14 +19,9 @@
     <ng-container matColumnDef="school">
       <mat-header-cell *matHeaderCellDef> School </mat-header-cell>
       <mat-cell *matCellDef="let user">
-        <ng-container *ngIf="!user.isEditing; else editSchool">
-          {{ user.school }}
+        <ng-container>
+          {{ getSchoolNameById(user) }}
         </ng-container>
-        <ng-template #editSchool>
-          <mat-select [(ngModel)]="user.schoolId" (selectionChange)="onSchoolChange(user, user.schoolId)">
-            <mat-option *ngFor="let school of schools" [value]="school.id">{{ school.name }}</mat-option>
-          </mat-select>
-        </ng-template>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="action">

@@ -57,4 +57,8 @@ public class SchoolService {
         }
     }
 
+    public Optional<School> getSchoolById(Long id) {
+        return schoolRepository.findById(id);
+    }
+
 }

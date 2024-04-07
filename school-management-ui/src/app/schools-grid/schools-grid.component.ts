@@ -29,7 +29,7 @@ export class SchoolsGridComponent implements OnInit {
   openAddSchoolDialog(): void {
     const dialogRef = this.dialog.open(EditSchoolComponent, {
       width: '250px',
-      data: { school: {  id: 1, name: 'School 1', address: 'Address 1' } } // Pass initial data if needed
+      data: { school: { name: 'School 1', address: 'Address 1' } } // Pass initial data if needed
     });
 
     dialogRef.afterClosed().subscribe(result => {
