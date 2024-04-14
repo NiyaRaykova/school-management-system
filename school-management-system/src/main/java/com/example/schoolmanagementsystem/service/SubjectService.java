@@ -1,7 +1,5 @@
 package com.example.schoolmanagementsystem.service;
-import com.example.schoolmanagementsystem.model.School;
 import com.example.schoolmanagementsystem.model.Subject;
-import com.example.schoolmanagementsystem.repository.SchoolRepository;
 import com.example.schoolmanagementsystem.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +36,9 @@ public class SubjectService {
             return true;
         }
         return false;
+    }
+
+    public Optional<Subject> getSubjectById(Long id) {
+        return subjectRepository.findById(id);
     }
 }

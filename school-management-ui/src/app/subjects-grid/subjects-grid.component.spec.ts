@@ -11,7 +11,7 @@ describe('SubjectsGridComponent', () => {
       declarations: [SubjectsGridComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SubjectsGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

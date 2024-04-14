@@ -24,5 +24,7 @@ public class SchoolManagementSystemApplication {
 		userService.registerUser("pass", "admin", Role.ADMIN);
 		userService.registerUser("pass", "teacher", Role.TEACHER);
 		userService.registerUser("pass", "student", Role.STUDENT);
+		userService.registerUser("pass", "parent", Role.PARENT);
+		userService.registerUser("pass", "director", Role.DIRECTOR);
 	}
 }

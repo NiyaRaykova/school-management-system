@@ -1,6 +1,7 @@
 package com.example.schoolmanagementsystem.controller;
 
 import com.example.schoolmanagementsystem.model.LoginResponse;
+import com.example.schoolmanagementsystem.model.Subject;
 import com.example.schoolmanagementsystem.model.User;
 import com.example.schoolmanagementsystem.model.UserDTO;
 import com.example.schoolmanagementsystem.service.SchoolService;

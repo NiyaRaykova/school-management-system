@@ -44,6 +44,9 @@ public class UserService {
             if (user.getSchool() != null) {
                 existingUser.setSchool(user.getSchool());
             }
+            if (user.getSubject() != null) {
+                existingUser.setSubject(user.getSubject());
+            }
             return usersRepository.save(existingUser);
         }).orElseThrow(() -> new RuntimeException(
                 "User not found with id " + id)); // Consider a more specific exception

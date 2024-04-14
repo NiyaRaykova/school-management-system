@@ -3,6 +3,8 @@ package com.example.schoolmanagementsystem.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name="users_table")
@@ -25,7 +27,7 @@ public class User {
     @JoinColumn(name = "school_id")
     private School school;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "subject_id")
-    private Subject subject;
+    private List<Subject> subject;
 }

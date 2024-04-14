@@ -2,6 +2,8 @@ package com.example.schoolmanagementsystem.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserDTO {
 
@@ -15,5 +17,5 @@ public class UserDTO {
 
     private Long schoolId;
 
-    private Subject subject;
+    private List<Long> subjectIds;
 }
