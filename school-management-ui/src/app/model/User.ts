@@ -1,5 +1,6 @@
 import { UserType } from './UserType';
 import { School } from './School';
+import { Subject } from './Subject';
 
 export interface User {
   id: number;
@@ -7,5 +8,6 @@ export interface User {
   email: string;
   role: UserType;
   school?: School;
-  schoolId?: string
+  schoolId?: string;
+  subjects?: Subject[];
 }

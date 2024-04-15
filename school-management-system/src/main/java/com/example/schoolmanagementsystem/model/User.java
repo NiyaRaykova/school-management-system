@@ -3,7 +3,7 @@ package com.example.schoolmanagementsystem.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -12,6 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(length = 45)
@@ -27,7 +28,11 @@ public class User {
     @JoinColumn(name = "school_id")
     private School school;
 
-    @ManyToMany
-    @JoinColumn(name = "subject_id")
-    private List<Subject> subject;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_subjects",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private Set<Subject> subjects;
 }

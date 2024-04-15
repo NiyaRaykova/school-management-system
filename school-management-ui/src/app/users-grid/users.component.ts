@@ -6,6 +6,7 @@ import { User } from '../model/User';
 import { School } from '../model/School';
 import { UserService } from '../service/user.service';
 import { SchoolService } from '../service/school.service';
+import { Subject } from '../model/Subject';
 
 @Component({
   selector: 'app-users',
@@ -29,6 +30,14 @@ export class UsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe((users: User[]) => {
       this.users = users;
     });
+  }
+
+  getSubjectNames(subjects: Subject[]): string[] {
+    if (subjects == undefined) {
+      return [];
+    }
+
+    return subjects.map(subject => subject.name);
   }
 
   public getSchoolNameById(user: User): string | undefined  {
@@ -57,7 +66,8 @@ export class UsersComponent implements OnInit {
           name: result.name,
           email: result.email,
           role: result.role,
-          schoolId: result.schoolId
+          schoolId: result.schoolId,
+          subjects: result.subjects
         };
 
         // Now `user` should match the expected type structure of `Partial<User>`

@@ -19,7 +19,7 @@ public class Subject {
     private String name;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "subject")
+    @ManyToMany(mappedBy = "subjects")
     private List<User> users;
 
 }

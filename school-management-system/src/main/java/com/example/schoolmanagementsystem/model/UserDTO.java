@@ -17,5 +17,5 @@ public class UserDTO {
 
     private Long schoolId;
 
-    private List<Long> subjectIds;
+    private List<Long> subjects;
 }

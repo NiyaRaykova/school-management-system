@@ -5,6 +5,7 @@ import com.example.schoolmanagementsystem.model.Subject;
 import com.example.schoolmanagementsystem.model.User;
 import com.example.schoolmanagementsystem.model.UserDTO;
 import com.example.schoolmanagementsystem.service.SchoolService;
+import com.example.schoolmanagementsystem.service.SubjectService;
 import com.example.schoolmanagementsystem.service.UserService;
 
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,7 @@ public class UserController {
 
     private final UserService userService;
     private final SchoolService schoolService;
+    private final SubjectService subjectService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
@@ -74,20 +77,26 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUserById(@PathVariable Long id,
-            @RequestBody UserDTO userDto) {
-        User updatedUser;
-        User user = this.userService.findUserByID(userDto.getId()).orElse(null);
+    public ResponseEntity<User> updateUserById(@PathVariable Long id, @RequestBody UserDTO userDto) {
+        User user = userService.findUserByID(id).orElse(null);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-        if (userDto.getSchoolId() != null && user != null) {
+        if (userDto.getSchoolId() != null) {
             user.setSchool(schoolService.getSchoolById(userDto.getSchoolId()).orElse(null));
         }
 
-        updatedUser = userService.updateUser(id, user);
+        if (userDto.getSubjects() != null && !userDto.getSubjects().isEmpty()) {
+            Set<Subject> subjects = subjectService.findSubjectsByIds(userDto.getSubjects());
+            user.setSubjects(subjects);
+        }
+
+        User updatedUser = userService.updateUser(id, user);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

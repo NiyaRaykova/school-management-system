@@ -44,8 +44,8 @@ public class UserService {
             if (user.getSchool() != null) {
                 existingUser.setSchool(user.getSchool());
             }
-            if (user.getSubject() != null) {
-                existingUser.setSubject(user.getSubject());
+            if (user.getSubjects() != null) {
+                existingUser.setSubjects(user.getSubjects());
             }
             return usersRepository.save(existingUser);
         }).orElseThrow(() -> new RuntimeException(

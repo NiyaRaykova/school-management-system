@@ -4,8 +4,10 @@ import com.example.schoolmanagementsystem.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SubjectService {
@@ -23,6 +25,10 @@ public class SubjectService {
             // copy other properties
             return subjectRepository.save(existingSubject);
         }).orElseThrow(() -> new RuntimeException("Subject not found with id " + id)); // Consider a more specific exception
+    }
+
+    public Set<Subject> findSubjectsByIds(List<Long> ids) {
+        return new HashSet<>(subjectRepository.findAllById(ids));
     }
 
     public Subject createSubject(Subject subject) {
