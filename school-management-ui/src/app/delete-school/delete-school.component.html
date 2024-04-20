@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content>
+  <form [formGroup]="deleteSchoolForm">
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" [mat-dialog-close]="deleteSchoolForm.getRawValue()" cdkFocusInitial>Delete</button>
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+</mat-dialog-actions>

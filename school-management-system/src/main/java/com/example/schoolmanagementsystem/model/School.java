@@ -22,6 +22,6 @@ public class School {
     private String address;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school")
     private List<User> users;
 }

@@ -19,7 +19,7 @@ public class Subject {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "subjects")
     private List<User> users;
 
 }

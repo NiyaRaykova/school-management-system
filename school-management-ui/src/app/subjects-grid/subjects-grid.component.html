@@ -1,0 +1,29 @@
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="subjects">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+      <mat-cell *matCellDef="let subject"> {{ subject.id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let subject"> {{ subject.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+      <mat-cell *matCellDef="let subject">
+        <button mat-icon-button (click)="editSubject(subject)" color="primary" >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteSubject(subject)" color="primary">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['id', 'name', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'name', 'action']"></mat-row>
+  </mat-table>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+  <button mat-raised-button color="red" (click)="openAddSubjectDialog()" >Add Subject</button>
+</div>

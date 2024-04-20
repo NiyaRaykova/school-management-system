@@ -1,7 +1,9 @@
 package com.example.schoolmanagementsystem.controller;
 
+import com.example.schoolmanagementsystem.model.School;
 import com.example.schoolmanagementsystem.model.Subject;
 import com.example.schoolmanagementsystem.service.SubjectService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,13 @@ public class SubjectController {
     public ResponseEntity<List<Subject>> getAllSubjects() {
         List<Subject> subjects = subjectService.findAllSubjects();
         return ResponseEntity.ok(subjects);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/subjects")
+    public ResponseEntity<Subject> createSubject(@RequestBody Subject subject) {
+        Subject createdSubject = subjectService.createSubject(subject);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdSubject);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

@@ -3,7 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
 import { User } from '../model/User';
+import { School } from '../model/School';
 import { UserService } from '../service/user.service';
+import { SchoolService } from '../service/school.service';
+import { Subject } from '../model/Subject';
 
 @Component({
   selector: 'app-users',
@@ -13,18 +16,38 @@ import { UserService } from '../service/user.service';
 export class UsersComponent implements OnInit {
 
   users: User[] = [];
+  schools: School[] = [];
 
-  constructor(public dialog: MatDialog, private userService: UserService) {
+  constructor(public dialog: MatDialog, private userService: UserService, private schoolSerivce: SchoolService) {
   }
 
   ngOnInit(): void {
     this.loadUsers();
+    this.loadSchools();
   }
 
   loadUsers(): void {
     this.userService.getAllUsers().subscribe((users: User[]) => {
       this.users = users;
     });
+  }
+
+  getSubjectNames(subjects: Subject[]): string[] {
+    if (subjects == undefined) {
+      return [];
+    }
+
+    return subjects.map(subject => subject.name);
+  }
+
+  public getSchoolNameById(user: User): string | undefined  {
+    return user?.school?.name ? user.school.name : undefined;
+  }
+
+  loadSchools(): void {
+     this.schoolSerivce.getAllSchools().subscribe((schools: School[]) => {
+       this.schools = schools;
+     });
   }
 
   editUser(user: User): void {
@@ -42,7 +65,9 @@ export class UsersComponent implements OnInit {
           id: id,
           name: result.name,
           email: result.email,
-          role: result.role
+          role: result.role,
+          schoolId: result.schoolId,
+          subjects: result.subjects
         };
 
         // Now `user` should match the expected type structure of `Partial<User>`

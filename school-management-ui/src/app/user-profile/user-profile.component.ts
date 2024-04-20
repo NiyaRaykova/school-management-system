@@ -35,38 +35,4 @@ export class UserProfileComponent implements OnInit {
       this.user = user;
     });
   }
-
-  editProfile(user: User): void {
-    const dialogRef = this.dialog.open(EditUserComponent, {
-      width: '250px',
-      data: {
-        user: user,
-        showRole: false
-      }
-    });
-
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const id = result.id ?? 0;
-        const email = result.email ?? 0;
-
-
-        const user: User = {
-          id: id,
-          name: result.name,
-          email: result.email,
-          role: result.role
-        };
-
-        this.userService.updateUser(id, user).subscribe(result => {
-          if (result) {
-            this.identityManagement.setUserEmail(email);
-            this.router.navigateByUrl('/userProfile');
-            this.loadUser();
-          }
-        });
-      }
-    });
-  }
 }

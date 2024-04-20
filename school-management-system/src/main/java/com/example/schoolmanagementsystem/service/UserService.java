@@ -10,14 +10,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository usersRepository;
+    private final UserRepository usersRepository;
 
-    public User registerUser( String password, String email, Role role){
-        if (email == null || password == null || role == null){
+    public User registerUser(String password, String email, Role role) {
+        if (email == null || password == null || role == null) {
             return null;
         }
         // TODO handle more gracefully if there is already present username with such email
@@ -36,13 +38,18 @@ public class UserService {
     }
 
     public User updateUser(Long id, User user) {
-        // Check if user exists, perform update logic, handle exceptions as needed
         return usersRepository.findById(id).map(existingUser -> {
             existingUser.setRole(user.getRole());
             existingUser.setEmail(user.getEmail());
-            // copy other properties
+            if (user.getSchool() != null) {
+                existingUser.setSchool(user.getSchool());
+            }
+            if (user.getSubjects() != null) {
+                existingUser.setSubjects(user.getSubjects());
+            }
             return usersRepository.save(existingUser);
-        }).orElseThrow(() -> new RuntimeException("User not found with id " + id)); // Consider a more specific exception
+        }).orElseThrow(() -> new RuntimeException(
+                "User not found with id " + id)); // Consider a more specific exception
     }
 
     public User updateUser(String email, User user) {
@@ -52,7 +59,8 @@ public class UserService {
             existingUser.setEmail(user.getEmail());
             // copy other properties
             return usersRepository.save(existingUser);
-        }).orElseThrow(() -> new RuntimeException("User not found with email " + email)); // Consider a more specific exception
+        }).orElseThrow(() -> new RuntimeException(
+                "User not found with email " + email)); // Consider a more specific exception
     }
 
     public boolean deleteUserById(Long id) {
@@ -64,7 +72,7 @@ public class UserService {
         return false;
     }
 
-    public User authenticate(String email, String password){
+    public User authenticate(String email, String password) {
         return usersRepository.findByEmailAndPassword(email, password).orElse(null);
     }
 

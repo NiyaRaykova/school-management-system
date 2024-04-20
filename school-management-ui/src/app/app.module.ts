@@ -38,6 +38,10 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { SchoolsGridComponent } from './schools-grid/schools-grid.component';
 import { EditSchoolComponent } from './edit-school/edit-school.component';
+import { DeleteSchoolComponent } from './delete-school/delete-school.component';
+import { SubjectsGridComponent } from './subjects-grid/subjects-grid.component';
+import { EditSubjectComponent } from './edit-subject/edit-subject.component';
+import { DeleteSubjectComponent } from './delete-subject/delete-subject.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { EditSchoolComponent } from './edit-school/edit-school.component';
     EditUserComponent,
     DeleteUserComponent,
     SchoolsGridComponent,
-    EditSchoolComponent
+    EditSchoolComponent,
+    DeleteSchoolComponent,
+    SubjectsGridComponent,
+    EditSubjectComponent,
+    DeleteSubjectComponent
   ],
   imports: [
     BrowserModule,
