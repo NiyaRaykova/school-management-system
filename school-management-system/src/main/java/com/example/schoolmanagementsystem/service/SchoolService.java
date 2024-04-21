@@ -37,8 +37,8 @@ public class SchoolService {
     }
 
     public boolean deleteSchoolById(Long id) {
-        Optional<School> userOptional = schoolRepository.findById(id);
-        if (userOptional.isPresent()) {
+        Optional<School> schoolOptional = schoolRepository.findById(id);
+        if (schoolOptional.isPresent()) {
             schoolRepository.deleteById(id);
             return true;
         }

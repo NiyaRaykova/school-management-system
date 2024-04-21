@@ -28,7 +28,7 @@ export class SchoolService {
     return this.http.put<School>(`${this.baseUrl}/schools/${id}`, school);
   }
 
-   public createSchool(school: School): Observable<School> {
+  public createSchool(school: School): Observable<School> {
     return this.http.post<School>(`${this.baseUrl}/schools`, school);
   }
 

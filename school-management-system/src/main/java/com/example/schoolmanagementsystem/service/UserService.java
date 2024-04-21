@@ -3,8 +3,6 @@ package com.example.schoolmanagementsystem.service;
 import com.example.schoolmanagementsystem.model.Role;
 import com.example.schoolmanagementsystem.model.User;
 import com.example.schoolmanagementsystem.repository.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +39,15 @@ public class UserService {
         return usersRepository.findById(id).map(existingUser -> {
             existingUser.setRole(user.getRole());
             existingUser.setEmail(user.getEmail());
+
+            if (user.getSchoolClass() != null) {
+                existingUser.setSchoolClass(user.getSchoolClass());
+            }
+
+            if (user.getName() != null) {
+                existingUser.setName(user.getName());
+            }
+
             if (user.getSchool() != null) {
                 existingUser.setSchool(user.getSchool());
             }
@@ -57,6 +64,7 @@ public class UserService {
         return usersRepository.findByEmail(email).map(existingUser -> {
             existingUser.setRole(user.getRole());
             existingUser.setEmail(user.getEmail());
+            existingUser.setSchoolClass(user.getSchoolClass());
             // copy other properties
             return usersRepository.save(existingUser);
         }).orElseThrow(() -> new RuntimeException(

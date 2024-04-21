@@ -83,6 +83,14 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
+        if (userDto.getSchoolClass() != null) {
+            user.setSchoolClass(userDto.getSchoolClass());
+        }
+
+        if (userDto.getName() != null) {
+            user.setName(userDto.getName());
+        }
+
         if (userDto.getSchoolId() != null) {
             user.setSchool(schoolService.getSchoolById(userDto.getSchoolId()).orElse(null));
         }

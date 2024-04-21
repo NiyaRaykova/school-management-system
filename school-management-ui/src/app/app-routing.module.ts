@@ -7,6 +7,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './users-grid/users.component';
 import { SchoolsGridComponent } from './schools-grid/schools-grid.component';
 import { SubjectsGridComponent } from './subjects-grid/subjects-grid.component';
+import { ProgramsGridComponent } from './programs-grid/programs-grid.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'subjects',
     component: SubjectsGridComponent,
+  },
+  {
+    path: 'programs',
+    component: ProgramsGridComponent,
   }
 ];
 

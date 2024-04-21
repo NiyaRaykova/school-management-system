@@ -8,13 +8,13 @@
       <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.name }} </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="password">
-      <mat-header-cell *matHeaderCellDef> Password </mat-header-cell>
-      <mat-cell *matCellDef="let user"> {{ user.password }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="school">
       <mat-header-cell *matHeaderCellDef> School </mat-header-cell>
@@ -23,6 +23,10 @@
     <ng-container matColumnDef="subjects">
       <mat-header-cell *matHeaderCellDef> Subjects </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ getSubjectNames(user.subjects).join(', ') }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="schoolClass">
+      <mat-header-cell *matHeaderCellDef> School Class </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.schoolClass }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
@@ -36,7 +40,7 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['id', 'email', 'password', 'role', 'school', 'subjects', 'action']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['id', 'email', 'password', 'role', 'school', 'subjects', 'action']"></mat-row>
+    <mat-header-row *matHeaderRowDef="['email', 'name', 'role', 'school', 'subjects', 'schoolClass', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['email', 'name', 'role', 'school', 'subjects', 'schoolClass', 'action']"></mat-row>
   </mat-table>
 </div>

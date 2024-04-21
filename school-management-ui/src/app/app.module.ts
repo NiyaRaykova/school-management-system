@@ -42,6 +42,9 @@ import { DeleteSchoolComponent } from './delete-school/delete-school.component';
 import { SubjectsGridComponent } from './subjects-grid/subjects-grid.component';
 import { EditSubjectComponent } from './edit-subject/edit-subject.component';
 import { DeleteSubjectComponent } from './delete-subject/delete-subject.component';
+import { ProgramsGridComponent } from './programs-grid/programs-grid.component';
+import { DeleteProgramComponent } from './delete-program/delete-program.component';
+import { EditProgramComponent } from './edit-program/edit-program.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { DeleteSubjectComponent } from './delete-subject/delete-subject.componen
     DeleteSchoolComponent,
     SubjectsGridComponent,
     EditSubjectComponent,
-    DeleteSubjectComponent
+    DeleteSubjectComponent,
+    ProgramsGridComponent,
+    DeleteProgramComponent,
+    EditProgramComponent
   ],
   imports: [
     BrowserModule,

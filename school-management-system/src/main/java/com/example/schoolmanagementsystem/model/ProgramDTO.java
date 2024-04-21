@@ -5,21 +5,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class UserDTO {
-
+public class ProgramDTO {
+    
     private Long id;
 
-    private String email;
-
-    private String password;
-
     private String name;
-
-    private Integer schoolClass;
-
-    private Role role;
-
-    private Long schoolId;
 
     private List<Long> subjects;
 }

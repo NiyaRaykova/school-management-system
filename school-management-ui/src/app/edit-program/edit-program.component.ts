@@ -1,25 +1,22 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserType } from '../model/UserType';
 import { School } from '../model/School';
+import { Program } from '../model/Program';
+import { ProgramService } from '../service/program.service';
 import { SchoolService } from '../service/school.service';
 import { SubjectService } from '../service/subject.service';
 import { Subject } from '../model/Subject';
 
 @Component({
-  selector: 'app-edit-user-modal',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  selector: 'app-edit-program',
+  templateUrl: './edit-program.component.html',
+  styleUrl: './edit-program.component.css'
 })
-export class EditUserComponent implements OnInit {
-  editUserForm = new FormGroup({
+export class EditProgramComponent implements OnInit {
+  editProgramForm = new FormGroup({
     id: new FormControl({ value: 0, disabled: true }),
-    email: new FormControl(''),
     name: new FormControl(''),
-    schoolClass: new FormControl(''),
-    role: new FormControl(''),
-    schoolId: new FormControl(''),
     subjects: new FormControl([])
   });
 
@@ -38,12 +35,8 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  protected readonly UserType: UserType[] = Object.values(UserType).filter(t => {
-    return t != UserType.ADMIN;
-  });
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private schoolService: SchoolService, private subjectService: SubjectService) {
-    this.editUserForm.patchValue(data.user);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private programService: ProgramService, private schoolService: SchoolService, private subjectService: SubjectService) {
+    this.editProgramForm.patchValue(data.program);
   }
 
   ngOnInit(): void {

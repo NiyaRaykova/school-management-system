@@ -4,8 +4,9 @@ import { Subject } from './Subject';
 
 export interface User {
   id: number;
-  name: string;
   email: string;
+  schoolClass?: number;
+  name?: string;
   role: UserType;
   school?: School;
   schoolId?: string;

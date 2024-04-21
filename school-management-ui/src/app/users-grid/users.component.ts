@@ -65,6 +65,7 @@ export class UsersComponent implements OnInit {
           id: id,
           name: result.name,
           email: result.email,
+          schoolClass: result.schoolClass,
           role: result.role,
           schoolId: result.schoolId,
           subjects: result.subjects
@@ -95,6 +96,7 @@ export class UsersComponent implements OnInit {
             id: id,
             name: result.name,
             email: result.email,
+            schoolClass: result.schoolClass,
             role: result.role
           };
 
