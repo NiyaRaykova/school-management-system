@@ -1,11 +1,11 @@
 package com.example.schoolmanagementsystem.controller;
 
 import com.example.schoolmanagementsystem.model.LoginResponse;
-import com.example.schoolmanagementsystem.model.Subject;
+import com.example.schoolmanagementsystem.model.Program;
 import com.example.schoolmanagementsystem.model.User;
 import com.example.schoolmanagementsystem.model.UserDTO;
 import com.example.schoolmanagementsystem.service.SchoolService;
-import com.example.schoolmanagementsystem.service.SubjectService;
+import com.example.schoolmanagementsystem.service.ProgramService;
 import com.example.schoolmanagementsystem.service.UserService;
 
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class UserController {
 
     private final UserService userService;
     private final SchoolService schoolService;
-    private final SubjectService subjectService;
+    private final ProgramService programService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
@@ -95,9 +95,9 @@ public class UserController {
             user.setSchool(schoolService.getSchoolById(userDto.getSchoolId()).orElse(null));
         }
 
-        if (userDto.getSubjects() != null && !userDto.getSubjects().isEmpty()) {
-            Set<Subject> subjects = subjectService.findSubjectsByIds(userDto.getSubjects());
-            user.setSubjects(subjects);
+        if (userDto.getPrograms() != null && !userDto.getPrograms().isEmpty()) {
+            Set<Program> programs = programService.findProgramsByIds(userDto.getPrograms());
+            user.setPrograms(programs);
         }
 
         User updatedUser = userService.updateUser(id, user);

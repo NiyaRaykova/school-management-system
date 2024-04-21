@@ -4,8 +4,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserType } from '../model/UserType';
 import { School } from '../model/School';
 import { SchoolService } from '../service/school.service';
-import { SubjectService } from '../service/subject.service';
-import { Subject } from '../model/Subject';
+import { ProgramService } from '../service/program.service';
+import { Program } from '../model/Program';
 
 @Component({
   selector: 'app-edit-user-modal',
@@ -20,11 +20,11 @@ export class EditUserComponent implements OnInit {
     schoolClass: new FormControl(''),
     role: new FormControl(''),
     schoolId: new FormControl(''),
-    subjects: new FormControl([])
+    programs: new FormControl([])
   });
 
   schools: School[] = [];
-  subjects: Subject[] = [];
+  programs: Program[] = [];
 
   loadSchools(): void {
     this.schoolService.getAllSchools().subscribe((schools: School[]) => {
@@ -32,9 +32,9 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  loadSubjects(): void {
-    this.subjectService.getAllSubjects().subscribe((subjects: Subject[]) => {
-      this.subjects = subjects;
+  loadPrograms(): void {
+    this.programService.getAllPrograms().subscribe((programs: Program[]) => {
+      this.programs = programs;
     });
   }
 
@@ -42,12 +42,12 @@ export class EditUserComponent implements OnInit {
     return t != UserType.ADMIN;
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private schoolService: SchoolService, private subjectService: SubjectService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private schoolService: SchoolService, private programService: ProgramService) {
     this.editUserForm.patchValue(data.user);
   }
 
   ngOnInit(): void {
     this.loadSchools();
-    this.loadSubjects();
+    this.loadPrograms();
   }
 }

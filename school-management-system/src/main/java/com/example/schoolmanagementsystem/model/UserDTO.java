@@ -21,5 +21,5 @@ public class UserDTO {
 
     private Long schoolId;
 
-    private List<Long> subjects;
+    private List<Long> programs;
 }

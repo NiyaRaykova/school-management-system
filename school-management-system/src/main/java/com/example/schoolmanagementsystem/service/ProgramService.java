@@ -1,13 +1,16 @@
 package com.example.schoolmanagementsystem.service;
 import com.example.schoolmanagementsystem.model.Program;
+import com.example.schoolmanagementsystem.model.Subject;
 import com.example.schoolmanagementsystem.model.User;
 import com.example.schoolmanagementsystem.repository.ProgramRepository;
 import com.example.schoolmanagementsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProgramService {
@@ -62,6 +65,10 @@ public class ProgramService {
 
     public Optional<Program> findProgramByID(Long id) {
         return programRepository.findById(id);
+    }
+
+    public Set<Program> findProgramsByIds(List<Long> ids) {
+        return new HashSet<>(programRepository.findAllById(ids));
     }
 
 }

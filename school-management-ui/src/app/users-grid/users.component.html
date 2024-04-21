@@ -1,4 +1,5 @@
 <div class="mat-elevation-z8">
+  <h2 class="table-heading">Users</h2>
   <mat-table [dataSource]="users">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
@@ -20,9 +21,9 @@
       <mat-header-cell *matHeaderCellDef> School </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ getSchoolNameById(user) }} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="subjects">
-      <mat-header-cell *matHeaderCellDef> Subjects </mat-header-cell>
-      <mat-cell *matCellDef="let user"> {{ getSubjectNames(user.subjects).join(', ') }} </mat-cell>
+    <ng-container matColumnDef="programs">
+      <mat-header-cell *matHeaderCellDef> Programs </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ getProgramNames(user.programs).join(', ') }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="schoolClass">
       <mat-header-cell *matHeaderCellDef> School Class </mat-header-cell>
@@ -40,7 +41,7 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['email', 'name', 'role', 'school', 'subjects', 'schoolClass', 'action']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['email', 'name', 'role', 'school', 'subjects', 'schoolClass', 'action']"></mat-row>
+    <mat-header-row *matHeaderRowDef="['email', 'name', 'role', 'school', 'programs', 'schoolClass', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['email', 'name', 'role', 'school', 'programs', 'schoolClass', 'action']"></mat-row>
   </mat-table>
 </div>

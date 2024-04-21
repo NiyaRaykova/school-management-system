@@ -36,12 +36,14 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Subjects</mat-label>
-      <mat-select formControlName="subjects" multiple>
-        <mat-option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="editUserForm.get('role') && editUserForm.get('role')?.value === 'STUDENT' || editUserForm.get('role')?.value === 'TEACHER'">
+      <mat-form-field appearance="fill">
+        <mat-label>Programs</mat-label>
+        <mat-select formControlName="programs" multiple>
+          <mat-option *ngFor="let program of programs" [value]="program.id">{{ program.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <div *ngIf="editUserForm.get('role') && editUserForm.get('role')?.value === 'STUDENT'">
       <mat-form-field appearance="fill">

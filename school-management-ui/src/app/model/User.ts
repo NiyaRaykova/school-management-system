@@ -1,6 +1,6 @@
 import { UserType } from './UserType';
 import { School } from './School';
-import { Subject } from './Subject';
+import { Program } from './Program';
 
 export interface User {
   id: number;
@@ -10,5 +10,5 @@ export interface User {
   role: UserType;
   school?: School;
   schoolId?: string;
-  subjects?: Subject[];
+  programs?: Program[];
 }

@@ -55,6 +55,8 @@ export class IdentityManagementService {
     return null;
   }
 
+
+
   public isLoggedIn(): boolean {
     return this.getUserType() !== null;
   }

@@ -36,9 +36,9 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "user_subjects",
+            name = "user_programs",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id")
+            inverseJoinColumns = @JoinColumn(name = "program_id")
     )
-    private Set<Subject> subjects;
+    private Set<Program> programs;
 }

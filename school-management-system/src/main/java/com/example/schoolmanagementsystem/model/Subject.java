@@ -18,8 +18,4 @@ public class Subject {
     @Column(length = 45)
     private String name;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "subjects")
-    private List<User> users;
-
 }

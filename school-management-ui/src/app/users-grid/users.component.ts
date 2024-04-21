@@ -6,7 +6,7 @@ import { User } from '../model/User';
 import { School } from '../model/School';
 import { UserService } from '../service/user.service';
 import { SchoolService } from '../service/school.service';
-import { Subject } from '../model/Subject';
+import { Program } from '../model/Program';
 
 @Component({
   selector: 'app-users',
@@ -32,13 +32,14 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getSubjectNames(subjects: Subject[]): string[] {
-    if (subjects == undefined) {
-      return [];
-    }
-
-    return subjects.map(subject => subject.name);
+getProgramNames(programs: Program[]): string[] {
+  if (!programs) {
+    return [];
   }
+
+  // Use map with type assertion to ensure that program.name is always a string
+  return programs.map(program => program.name as string);
+}
 
   public getSchoolNameById(user: User): string | undefined  {
     return user?.school?.name ? user.school.name : undefined;
@@ -68,7 +69,7 @@ export class UsersComponent implements OnInit {
           schoolClass: result.schoolClass,
           role: result.role,
           schoolId: result.schoolId,
-          subjects: result.subjects
+          programs: result.programs
         };
 
         // Now `user` should match the expected type structure of `Partial<User>`

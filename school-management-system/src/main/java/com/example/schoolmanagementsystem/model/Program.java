@@ -1,8 +1,10 @@
 package com.example.schoolmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,4 +27,8 @@ public class Program {
             inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
     private Set<Subject> subjects;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "programs")
+    private List<User> users;
 }
