@@ -1,0 +1,12 @@
+.user-image {
+  background-image: url('../../assets/img.png');
+  background-size: cover;
+}
+
+mat-card {
+  margin: 20px;
+}
+
+mat-card-title, mat-card-subtitle {
+  color: #333;
+}

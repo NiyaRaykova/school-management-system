@@ -1,0 +1,34 @@
+<div class="mat-elevation-z8">
+  <h2 class="table-heading">Schools</h2>
+  <mat-table [dataSource]="schools">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+      <mat-cell *matCellDef="let school"> {{ school.id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let school"> {{ school.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address</mat-header-cell>
+      <mat-cell *matCellDef="let school"> {{ school.address }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+      <mat-cell *matCellDef="let school">
+        <button mat-icon-button (click)="editSchool(school)" color="primary" >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteSchool(school)" color="primary">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['id', 'name', 'address', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'name', 'address', 'action']"></mat-row>
+  </mat-table>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button mat-raised-button color="primary" (click)="openAddSchoolDialog()">Add School</button>
+</div>

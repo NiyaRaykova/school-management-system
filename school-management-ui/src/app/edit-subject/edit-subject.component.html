@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Add Subject</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editSubjectForm">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary" (click)="onSaveClick()">Save</button>
+</div>

@@ -1,0 +1,38 @@
+<div *ngIf="userType === null">
+  <mat-toolbar color="primary">
+    <button mat-icon-button routerLink="home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span>School Management</span>
+    <span class="example-spacer"></span>
+    <button routerLink="login" mat-button>Login</button>
+    <button routerLink="register" mat-button>Register</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="userType === UserType.ADMIN">
+  <mat-toolbar color="primary">
+    <button mat-icon-button routerLink="home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span>School Management</span>
+    <span class="example-spacer"></span>
+    <button routerLink="home" mat-button>Home</button>
+    <button routerLink="users" mat-button>Users</button>
+    <button routerLink="schools" mat-button>Schools</button>
+    <button routerLink="subjects" mat-button>Subjects</button>
+    <button routerLink="programs" mat-button>Programs</button>
+    <button routerLink="login" mat-button (click)="logout()" >Logout</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="userType === UserType.STUDENT || userType === UserType.PARENT || userType === UserType.DIRECTOR || userType === UserType.TEACHER">
+  <mat-toolbar color="primary">
+    <button mat-icon-button routerLink="home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span>School Management</span>
+    <span class="example-spacer"></span>
+    <button routerLink="home" mat-button>Home</button>
+    <button routerLink="userProfile" mat-button>Profile</button>
+    <button routerLink="login" mat-button (click)="logout()" >Logout</button>
+  </mat-toolbar>
+</div>

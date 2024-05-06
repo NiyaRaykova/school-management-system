@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content>
+  <form [formGroup]="editUserForm">
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>School</mat-label>
+      <mat-select formControlName="schoolId">
+        <mat-option *ngFor="let school of schools" [value]="school.id">
+          {{ school.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="data.showRole">
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option [value]="chosenRole" *ngFor="let chosenRole of UserType">
+            {{ chosenRole }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="editUserForm.get('role') && editUserForm.get('role')?.value === 'STUDENT' || editUserForm.get('role')?.value === 'TEACHER'">
+      <mat-form-field appearance="fill">
+        <mat-label>Programs</mat-label>
+        <mat-select formControlName="programs" multiple>
+          <mat-option *ngFor="let program of programs" [value]="program.id">{{ program.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="editUserForm.get('role') && editUserForm.get('role')?.value === 'STUDENT'">
+      <mat-form-field appearance="fill">
+        <mat-label>School Class</mat-label>
+        <mat-select formControlName="schoolClass">
+          <mat-option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" [value]="i">{{ i }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" [mat-dialog-close]="editUserForm.getRawValue()"
+          cdkFocusInitial>Save
+  </button>
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+</mat-dialog-actions>
